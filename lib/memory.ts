@@ -1,20 +1,33 @@
 // lib/memory.ts
 
-type MemoryStore = Record<string, string | number | boolean | object>;
+type MemoryItem = {
+  bot: string;
+  message: string;
+  response: string;
+};
 
-let shortTermMemory: MemoryStore = {};
+type MemoryStore = MemoryItem[];
+
+let store: MemoryStore = [];
 
 export const Memory = {
-  get(key: string) {
-    return shortTermMemory[key];
+  get(key: string): string | number | boolean | object {
+    return (store as any)[key];
   },
-  set(key: string, value: any) {
-    shortTermMemory[key] = value;
+
+  set(key: string, value: any): void {
+    (store as any)[key] = value;
   },
-  reset() {
-    shortTermMemory = {};
+
+  add(item: MemoryItem): void {
+    store.push(item);
   },
-  list() {
-    return shortTermMemory;
+
+  list(): MemoryStore {
+    return store;
   },
+
+  reset(): void {
+    store = [];
+  }
 };

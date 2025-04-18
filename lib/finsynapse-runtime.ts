@@ -3,7 +3,7 @@
 import { loadBot, BotRegistry } from "./bot-loader";
 import { Logger, LogLevel } from "./logger";
 import { Memory } from "./memory";
-import { FinSynapse } from "./finsynapse-core";
+import FinSynapse from "./finsynapse-core";
 
 export class FinSynapseRuntime {
   private activeBots: Record<string, ReturnType<typeof loadBot>> = {};
